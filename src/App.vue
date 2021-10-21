@@ -1,7 +1,7 @@
 <template>
   <div id="mainContainer">
-    <Menu class="menu"/>
-    <Main class="main"/>
+    <Menu/>
+    <Main/>
   </div>
 </template>
 
@@ -19,16 +19,34 @@ export default {
 </script>
 
 <style>
-html, body {
-   height: 100%;
+@media (orientation: portrait) {
+  html, body {
+    height: 100%;
+  }
+
+  #mainContainer {
+    height: 100%;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  }
 }
 
-#mainContainer {
-  height: 100%;
+@media (orientation: landscape) {
+  html, body {
+    height: 100%;
+  }
 
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  html {
+    z-index: 1;
+    overflow-y: auto;
+  }
 
-  display: flex;
-  flex-direction: row;
+  #mainContainer {
+    height: 100%;
+
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+
+    display: flex;
+    flex-direction: row;
+  }
 }
 </style>
