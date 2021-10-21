@@ -1,14 +1,15 @@
 <template>
-  <div id="container">
-      <div id="leftBox">
-        <h1>INC</h1>
-        <h2>Your Ice Cream Navigator</h2>
-      </div>
-      <div id="rightBox">
-        <div id="circle">
-          <img alt="logo" src="@/assets/logo.png">
-        </div>
+  <div id="containerMain">
+    <div id="leftBox">
+      <h1>INC</h1>
+      <h2>Your Ice Cream Navigator</h2>
     </div>
+    <div id="rightBox">
+      <div id="circle">
+        <img id ="logo" alt="logo" src="@/assets/logo.png">
+      </div>
+    </div>
+    <div id="footer">Robert Klinger i Krzysztof Picur © 2021 prawa zastrzeżone</div>
     </div>
 </template>
 
@@ -19,54 +20,62 @@ export default{
 </script>
 
 <style scoped>
-#container {
-  width: 84.4%;
+@import './MainP.css';
 
-  background-color: pink;
+@media (orientation: landscape) {
+  #containerMain {
+    width: 84.4%;
 
-  display: flex;
-  flex-direction: row;
-}
+    background-color: pink;
 
-#leftBox {
-  margin-top: auto;
-  margin-bottom: auto;
-  width: 50.25%;
+    display: flex;
+    flex-direction: row;
+  }
 
-  padding-left: 3.25vw;
-}
+  #leftBox {
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 50.25%;
 
-h1 {
-  font-size: 12vw;
-  margin-top: 0px;
-  margin-bottom: 20px;
-}
+    padding-left: 3.25vw;
+  }
 
-h2 {
-  font-size: 5.21vw;
-  margin-top: 20px;
-}
+  h1 {
+    font-size: 12vw;
+    margin-top: 0px;
+    margin-bottom: 20px;
+  }
 
-#rightBox {
-  width: 49.75%;
+  h2 {
+    font-size: 5.21vw;
+    margin-top: 20px;
+  }
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  #rightBox {
+    width: 49.75%;
 
-#circle {
-  width: 36.4vw;
-  height: 36.4vw;
-  border-radius: 50%;
-  background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  #circle {
+    width: 36.4vw;
+    height: 36.4vw;
+    border-radius: 50%;
+    background-color: white;
 
-img {
-  width: 33vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #logo {
+    width: 33vw;
+  }
+
+  #footer {
+    display: none;
+  }
 }
 </style>
