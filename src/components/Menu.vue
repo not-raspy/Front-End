@@ -46,25 +46,22 @@ export default{
   },
   data() {
     return {
-      currentMenuStatus: localStorage.getItem('menu'),
+      menu: false,
+      currentMenuStatus: ''
     }
   },
   methods: {
     menuStatusChange() {
-      const stored = localStorage.getItem('menu')
-      if (stored == '')
+      if (this.menu)
       {
-        localStorage.setItem('menu', 'show')
-        this.currentMenuStatus = localStorage.getItem('menu')
+        this.menu = false,
+        this.currentMenuStatus = 'show'
       }
       else
       {
-        localStorage.setItem('menu', '')
-        this.currentMenuStatus = localStorage.getItem('menu')
+        this.menu = true,
+        this.currentMenuStatus = ''
       }
-    },
-    registration() {
-      this.$emit('activeRegistration')
     }
   }
 }
