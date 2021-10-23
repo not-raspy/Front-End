@@ -1,8 +1,10 @@
 <template>
-  <div id="mainContainer">
-    <Menu/>
-    <Main/>
-  </div>
+  <v-app>
+    <div id="mainContainer">
+      <Menu @activeRegistration = "activeRegistration"/>
+      <Main/>
+    </div>
+  </v-app>
 </template>
 
 <script>
@@ -19,6 +21,26 @@ export default {
 </script>
 
 <style>
+.v-application {
+  line-height: 1;
+}
+
+.v-application ul {
+  padding-left: 0px;
+}
+
+.v-application .elevation-2 {
+  box-shadow: none !important;
+}
+
+.row {
+  margin: 0px;
+}
+
+.v-btn--is-elevated {
+  box-shadow: none;
+}
+
 @media (orientation: portrait) {
   html, body {
     height: 100%;

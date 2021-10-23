@@ -71,7 +71,7 @@ export default{
   }
 
   #logo {
-    width: 33vw;
+    width: 30vw;
   }
 
   #footer {
