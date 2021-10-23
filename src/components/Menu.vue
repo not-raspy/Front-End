@@ -1,48 +1,52 @@
 <template>
-    <div id="containerMenu">
-      <div id="profile">
-        <img alt="avatar" src="@/assets/avatar.png">
-      </div>
-      <v-app-bar-nav-icon
-        id="buttonMenu"
-        @click = "menuStatusChange">
-      </v-app-bar-nav-icon>
-      <ul id="menu" :class="currentMenuStatus">
-        <li>
-          <v-btn class="button" :class="currentMenuStatus"
-                  block
-                  elevation="2"
-                  x-large>
-                  <b>SZUKAJ LODA</b>
-          </v-btn>
-        </li>
-        <li>
-          <v-btn class="button" :class="currentMenuStatus"
-                  block
-                  elevation="2"
-                  x-large>
-                  <b>ZALOGUJ SIĘ</b>
-          </v-btn>
-        </li>
-        <li>
-          <v-btn class="button" :class="currentMenuStatus"
-                  block
-                  elevation="2"
-                  x-large>
-                  <b>REJESTRACJA</b>
-          </v-btn>
-        </li>
-      </ul>
-      <center>Robert Klinger i Krzysztof Picur © 2021 prawa zastrzeżone</center>
+  <div id="containerMenu">
+    <div id="profile">
+      <img alt="avatar" src="@/assets/avatar.png">
     </div>
+    <v-app-bar-nav-icon
+      id="buttonMenu"
+      @click = "menuStatusChange">
+    </v-app-bar-nav-icon>
+    <ul id="menu" :class="currentMenuStatus">
+      <li>
+        <v-btn
+          class="button"
+          :class="currentMenuStatus"
+          block
+          elevation="2"
+          x-large>
+          <b>SZUKAJ LODA</b>
+        </v-btn>
+      </li>
+      <li>
+        <Login/>
+      </li>
+      <li>
+        <v-btn
+          class="button"
+          :class="currentMenuStatus"
+          block
+          elevation="2"
+          x-large>
+        <b>REJESTRACJA</b>
+        </v-btn>
+      </li>
+    </ul>
+    <center>Robert Klinger i Krzysztof Picur © 2021 prawa zastrzeżone</center>
+  </div>
 </template>
 
 <script>
+import Login from './Login.vue'
+
 export default{
   name: 'Menu',
+  components: {
+    Login
+  },
   data() {
     return {
-      currentMenuStatus: localStorage.getItem('menu')
+      currentMenuStatus: localStorage.getItem('menu'),
     }
   },
   methods: {
@@ -58,12 +62,15 @@ export default{
         localStorage.setItem('menu', '')
         this.currentMenuStatus = localStorage.getItem('menu')
       }
+    },
+    registration() {
+      this.$emit('activeRegistration')
     }
   }
 }
 </script>
 
-<style scoped>
+<style>
 @import './MenuP.css';
 
 @media (orientation: landscape) {
@@ -112,7 +119,6 @@ export default{
     color: white !important;
 
     background-color: #ff9e4f !important;
-    box-shadow: none;
   }
 
   .button:hover {
