@@ -12,7 +12,7 @@
           v-bind="attrs"
           v-on="on"
         >
-          <b>ZALOGUJ SIĘ</b>
+          <b>REJESTRACJA</b>
         </v-btn>
       </template>
       <v-card id="card">
@@ -27,6 +27,10 @@
         <v-card-text>
           <v-container>
             <v-text-field
+              label="Name"
+              required
+            ></v-text-field>
+            <v-text-field
               label="Email"
               required
             ></v-text-field>
@@ -35,24 +39,19 @@
               required
             ></v-text-field>
           </v-container>
-          <v-checkbox
-            v-model="hover"
-            label="Zapamiętaj mnie"
-            hide-details
-          ></v-checkbox>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            id="buttonLogIn"
+            id="buttonRegister"
             block
             color="blue darken-1"
           >
-            ZALOGUJ SIĘ
+            ZAREJESTRUJ się
           </v-btn>
         </v-card-actions>
-        <div id="otherLogins">
-          <span>lub zaloguj się przez</span>
+        <div id="otherRegistrations">
+          <span>lub zarejestruj się przez</span>
           <div id="icons">
             <font-awesome :icon="['fab', 'facebook-square']"/>
             <font-awesome :icon="['fab', 'google']"/>
@@ -107,11 +106,11 @@
   width: 123.63px;
 }
 
-#buttonLogIn {
+#buttonRegister {
   color: white;
 }
 
-#otherLogins {
+#otherRegistrations {
   display: flex;
   flex-direction: column;
   align-content: center;
