@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <div id="mainContainer">
-      <Menu @activeRegistration = "activeRegistration"/>
+      <Menu/>
       <Main/>
     </div>
   </v-app>

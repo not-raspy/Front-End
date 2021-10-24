@@ -22,14 +22,7 @@
         <Login/>
       </li>
       <li>
-        <v-btn
-          class="button"
-          :class="currentMenuStatus"
-          block
-          elevation="2"
-          x-large>
-        <b>REJESTRACJA</b>
-        </v-btn>
+        <Registration/>
       </li>
     </ul>
     <center>Robert Klinger i Krzysztof Picur © 2021 prawa zastrzeżone</center>
@@ -38,11 +31,14 @@
 
 <script>
 import Login from './Login.vue'
+import Registration from './Registration.vue'
+
 
 export default{
   name: 'Menu',
   components: {
-    Login
+    Login,
+    Registration
   },
   data() {
     return {
