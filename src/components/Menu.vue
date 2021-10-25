@@ -14,7 +14,8 @@
           :class="currentMenuStatus"
           block
           elevation="2"
-          x-large>
+          x-large
+          @click="event">
           <b>SZUKAJ LODA</b>
         </v-btn>
       </li>
@@ -58,6 +59,9 @@ export default{
         this.menu = true,
         this.currentMenuStatus = ''
       }
+    },
+    event() {
+      this.$emit('activateTheSearchEngine')
     }
   }
 }
