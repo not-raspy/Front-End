@@ -1,8 +1,9 @@
 <template>
   <v-app>
     <div id="mainContainer">
-      <Menu/>
-      <Main/>
+      <Menu @activateTheSearchEngine="activateTheSearchEngine"/>
+      <Main :style="'display: ' + main + ';'"/>
+      <SearchEngine :style="'display: ' + searchEngine + ';'"/>
     </div>
   </v-app>
 </template>
@@ -10,12 +11,26 @@
 <script>
 import Menu from './components/Menu.vue'
 import Main from './components/Main.vue'
+import SearchEngine from './components/SearchEngine.vue'
 
 export default {
   name: 'App',
   components: {
     Menu,
-    Main
+    Main,
+    SearchEngine
+  },
+  data() {
+    return {
+      main: '',
+      searchEngine: 'none'
+    }
+  },
+  methods: {
+    activateTheSearchEngine() {
+      this.main = 'none'
+      this.searchEngine = ' inline-block'
+    }
   }
 }
 </script>
@@ -39,6 +54,10 @@ export default {
 
 .v-btn--is-elevated {
   box-shadow: none;
+}
+
+.v-input__append-inner {
+    display: none !important;
 }
 
 @media (orientation: portrait) {
