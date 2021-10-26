@@ -2,8 +2,7 @@
   <v-app>
     <div id="mainContainer">
       <Menu @activateTheSearchEngine="activateTheSearchEngine"/>
-      <Main :style="'display: ' + main + ';'"/>
-      <SearchEngine :style="'display: ' + searchEngine + ';'"/>
+      <component :is="selectedComponent"/>
     </div>
   </v-app>
 </template>
@@ -22,14 +21,12 @@ export default {
   },
   data() {
     return {
-      main: null,
-      searchEngine: 'none'
+      selectedComponent: Main
     }
   },
   methods: {
     activateTheSearchEngine() {
-      this.main = 'none'
-      this.searchEngine = 'inline-block'
+      this.selectedComponent = SearchEngine
     }
   }
 }
