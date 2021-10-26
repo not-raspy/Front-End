@@ -33,6 +33,7 @@
 
 <script>
   export default {
+    name: 'SearchEngine',
     data: () => ({
       colors: ['green', 'purple', 'indigo', 'cyan', 'teal', 'orange'],
       nonce: 1,
