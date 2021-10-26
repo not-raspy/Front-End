@@ -29,7 +29,7 @@ export default {
   methods: {
     activateTheSearchEngine() {
       this.main = 'none'
-      this.searchEngine = ' inline-block'
+      this.searchEngine = 'inline-block'
     }
   }
 }

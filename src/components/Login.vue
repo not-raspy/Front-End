@@ -11,6 +11,7 @@
           class="button"
           v-bind="attrs"
           v-on="on"
+          @click="menuStatusChange"
         >
           <b>ZALOGUJ SIĘ</b>
         </v-btn>
@@ -68,6 +69,11 @@
     data: () => ({
       dialog: false,
     }),
+    methods: {
+      menuStatusChange() {
+        this.$emit('menuStatusChange')
+      }
+    }
   }
 </script>
 
