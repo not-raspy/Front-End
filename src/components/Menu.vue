@@ -15,15 +15,16 @@
           block
           elevation="2"
           x-large
-          @click="event">
+          @click="event(); menuStatusChange();"
+        >
           <b>SZUKAJ LODA</b>
         </v-btn>
       </li>
       <li>
-        <Login/>
+        <Login @menuStatusChange="menuStatusChange"/>
       </li>
       <li>
-        <Registration/>
+        <Registration @menuStatusChange="menuStatusChange"/>
       </li>
     </ul>
     <center>Robert Klinger i Krzysztof Picur © 2021 prawa zastrzeżone</center>
