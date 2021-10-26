@@ -35,7 +35,6 @@
 import Login from './Login.vue'
 import Registration from './Registration.vue'
 
-
 export default{
   name: 'Menu',
   components: {
@@ -45,7 +44,7 @@ export default{
   data() {
     return {
       menu: false,
-      currentMenuStatus: ''
+      currentMenuStatus: null
     }
   },
   methods: {
@@ -58,7 +57,7 @@ export default{
       else
       {
         this.menu = true,
-        this.currentMenuStatus = ''
+        this.currentMenuStatus = null
       }
     },
     event() {
