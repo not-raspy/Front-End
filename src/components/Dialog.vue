@@ -1,23 +1,20 @@
 <template>
   <v-row justify="center">
+    <v-btn
+      id="buttonPortait"
+      class="button"
+      @click="dialog = true, hideMenu()"
+    >
+      <b>
+        <slot name="buttonInscription"/>
+      </b>
+    </v-btn>
+    
     <v-dialog
       v-model="dialog"
       persistent
       max-width="325px"
     >
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          id="buttonPortait"
-          class="button"
-          v-bind="attrs"
-          v-on="on"
-          @click="menuStatusChange"
-        >
-          <b>
-            <slot name="buttonInscription"/>
-          </b>
-        </v-btn>
-      </template>
       <v-card id="card">
         <font-awesome
           id="close" 
@@ -38,6 +35,7 @@
               label="Hasło"
               required
             ></v-text-field>
+            <slot name="repeatPassword"/>
           </v-container>
           <slot name="rememberMe"/>
         </v-card-text>
@@ -72,8 +70,8 @@
       dialog: false,
     }),
     methods: {
-      menuStatusChange() {
-        this.$emit('menuStatusChange')
+      hideMenu() {
+        this.$emit('hideMenu')
       }
     }
   }

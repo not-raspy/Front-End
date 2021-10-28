@@ -1,5 +1,5 @@
 <template>
-  <Dialog>
+  <Dialog @hideMenu="hideMenu">
     <template v-slot:buttonInscription>
       ZALOGUJ SIĘ
     </template>
@@ -22,6 +22,11 @@ export default {
   name: 'Login',
   components: {
     Dialog
+  },
+  methods: {
+    hideMenu() {
+      this.$emit('hideMenu')
+    }
   }
 }
 </script>
