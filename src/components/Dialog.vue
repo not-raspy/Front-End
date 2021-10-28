@@ -77,66 +77,59 @@
   }
 </script>
 
-<style scoped>
+<style lang="scss">
 #card {
   padding-top: 15.5%;
   padding-bottom: 5%;
   background-color: #ff9e4f;
 
   position: relative;
-}
-
-#close {
+  #close {
     position: absolute;
     top: 10px;
     right: 15px;
 
     cursor: pointer;
     font-size: x-large;
-}
+  }
+  #circle {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 7.5%;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: white;
 
-#circle {
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 7.5%;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    #logo {
+      width: 123.63px;
+    }
+  }
+  #buttonLogIn {
+    color: white;
+  }
+  #otherLogins {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    span {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    #icons {
+      padding-left: 30%;
+      padding-right: 30%;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+      font-size: 40px;
 
-#logo {
-  width: 123.63px;
-}
-
-#buttonLogIn {
-  color: white;
-}
-
-#otherLogins {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-}
-
-span {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-#icons {
-  padding-left: 30%;
-  padding-right: 30%;
-
-  font-size: 40px;
-
-  display: flex;
-  justify-content: space-around;
+      display: flex;
+      justify-content: space-around;
+    }
+  }
 }
 
 @media (orientation: portrait) {
