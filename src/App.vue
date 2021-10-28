@@ -32,7 +32,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .v-application {
   line-height: 1;
 }
@@ -60,11 +60,11 @@ export default {
 @media (orientation: portrait) {
   html, body {
     height: 100%;
-  }
 
-  #mainContainer {
-    height: 100%;
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    #mainContainer {
+      height: 100%;
+      font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    }
   }
 }
 
@@ -76,15 +76,15 @@ export default {
   html {
     z-index: 1;
     overflow-y: auto;
-  }
 
-  #mainContainer {
+    #mainContainer {
     height: 100%;
 
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
 
     display: flex;
     flex-direction: row;
+    }
   }
 }
 </style>

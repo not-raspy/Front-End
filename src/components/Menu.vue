@@ -11,10 +11,6 @@
       <li>
         <v-btn
           class="button"
-          :class="currentMenuStatus"
-          block
-          elevation="2"
-          x-large
           @click="menuStatusChange(), event()"
         >
           <b>SZUKAJ LODA</b>
@@ -67,68 +63,61 @@ export default{
 }
 </script>
 
-<style>
-@import './MenuP.css';
+<style lang="scss">
+@import './MenuP.scss';
 
 @media (orientation: landscape) {
   #containerMenu {
     width: 15.6%;
     background-color: #ff9e4f;
     position: relative;
-  }
+    #profile {
+      margin: 1.3vw auto 1.3vw;
 
-  #profile {
-    margin: 1.3vw auto 1.3vw;
+      width: 13vw;
+      height: 13vw;
 
-    width: 13vw;
-    height: 13vw;
+      border-radius: 50%;
+      background-color: #ffcf7f;
 
-    border-radius: 50%;
-    background-color: #ffcf7f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 4.15vw;
+      }
+    }
+    #buttonMenu {
+      display: none;
+    }
+    ul {
+      list-style-type: none;
+      .button {
+        padding: 1.565vw !important;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+        width: 100%;
+        height: 3.15vw !important;
 
-  img {
-    width: 4.15vw;
-  }
+        border-radius: 0px;
+        justify-content: left;
+        font-size: 1.565vw !important;
+        letter-spacing: 0px;
+        color: white !important;
 
-  #buttonMenu {
-    display: none;
-  }
+        background-color: #ff9e4f !important;
+      }
+      .button:hover {
+        background-color: #ee8d3e !important;
+      }
+    }
+    center {
+      position: absolute;
+      bottom: .75vw;
 
-  ul {
-    list-style-type: none;
-  }
-
-  .button {
-    padding: 1.565vw !important;
-
-    width: 100%;
-    height: 3.15vw !important;
-
-    border-radius: 0px;
-    justify-content: left;
-    font-size: 1.565vw !important;
-    letter-spacing: 0px;
-    color: white !important;
-
-    background-color: #ff9e4f !important;
-  }
-
-  .button:hover {
-    background-color: #ee8d3e !important;
-  }
-
-  center {
-    position: absolute;
-    bottom: .75vw;
-
-    font-size: 0.8vw;
-    line-height: 125%;
-    justify-content: center;
+      font-size: 0.8vw;
+      line-height: 125%;
+      justify-content: center;
+    }
   }
 }
 </style>
