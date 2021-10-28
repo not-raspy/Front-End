@@ -7,7 +7,7 @@
       id="buttonMenu"
       @click = "menuStatusChange">
     </v-app-bar-nav-icon>
-    <ul id="menu" :class="currentMenuStatus">
+    <ul :class="currentMenuStatus">
       <li>
         <v-btn
           class="button"
@@ -15,16 +15,16 @@
           block
           elevation="2"
           x-large
-          @click="event(); menuStatusChange();"
+          @click="menuStatusChange(), event()"
         >
           <b>SZUKAJ LODA</b>
         </v-btn>
       </li>
       <li>
-        <Login @menuStatusChange="menuStatusChange"/>
+        <Login @hideMenu="menuStatusChange"/>
       </li>
       <li>
-        <Registration @menuStatusChange="menuStatusChange"/>
+        <Registration @hideMenu="menuStatusChange"/>
       </li>
     </ul>
     <center>Robert Klinger i Krzysztof Picur © 2021 prawa zastrzeżone</center>
