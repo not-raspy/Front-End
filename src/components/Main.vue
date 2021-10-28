@@ -19,8 +19,8 @@ export default{
 }
 </script>
 
-<style scoped>
-@import './MainP.css';
+<style lang="scss">
+@import './MainP.scss';
 
 @media (orientation: landscape) {
   #containerMain {
@@ -30,52 +30,45 @@ export default{
 
     display: flex;
     flex-direction: row;
-  }
+    #leftBox {
+      margin-top: auto;
+      margin-bottom: auto;
+      width: 50.25%;
 
-  #leftBox {
-    margin-top: auto;
-    margin-bottom: auto;
-    width: 50.25%;
+      padding-left: 3.25vw;
+      h1 {
+        font-size: 12vw;
+        margin-top: 0px;
+        margin-bottom: 20px;
+      }
+      h2 {
+        font-size: 5.21vw;
+        margin-top: 20px;
+      }
+    }
+    #rightBox {
+      width: 49.75%;
 
-    padding-left: 3.25vw;
-  }
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      #circle {
+        width: 36.4vw;
+        height: 36.4vw;
+        border-radius: 50%;
+        background-color: white;
 
-  h1 {
-    font-size: 12vw;
-    margin-top: 0px;
-    margin-bottom: 20px;
-  }
-
-  h2 {
-    font-size: 5.21vw;
-    margin-top: 20px;
-  }
-
-  #rightBox {
-    width: 49.75%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #circle {
-    width: 36.4vw;
-    height: 36.4vw;
-    border-radius: 50%;
-    background-color: white;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #logo {
-    width: 30vw;
-  }
-
-  #footer {
-    display: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        #logo {
+          width: 30vw;
+        }
+      }
+    }
+    #footer {
+      display: none;
+    }
   }
 }
 </style>

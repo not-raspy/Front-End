@@ -61,8 +61,8 @@
   }
 </script>
 
-<style scoped>
-@import './SearchEngineP.css';
+<style lang="scss">
+@import './SearchEngineP.scss';
 
 #slotLabel {
   margin-left: 10px;
