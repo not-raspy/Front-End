@@ -57,6 +57,10 @@ export default {
     display: none !important;
 }
 
+.v-progress-circular {
+  margin: 1rem;
+}
+
 @media (orientation: portrait) {
   html, body {
     height: 100%;

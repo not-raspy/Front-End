@@ -9,7 +9,6 @@
         <slot name="buttonInscription"/>
       </b>
     </v-btn>
-    
     <v-dialog
       v-model="dialog"
       persistent
@@ -28,10 +27,13 @@
           <v-container>
             <slot name="v-text-field"/>
             <v-text-field
+              v-model="email"
               label="Email"
               required
             ></v-text-field>
             <v-text-field
+              v-model="password"
+              type="password"
               label="Hasło"
               required
             ></v-text-field>
@@ -45,6 +47,7 @@
             id="buttonLogIn"
             block
             color="blue darken-1"
+            @click="provideTheData"
           >
             <slot name="action"/>
           </v-btn>
@@ -64,17 +67,22 @@
 </template>
 
 <script>
-  export default {
-    name: 'Dialog',
-    data: () => ({
-      dialog: false,
-    }),
-    methods: {
-      hideMenu() {
-        this.$emit('hideMenu')
-      }
+export default {
+  name: 'Dialog',
+  data: () => ({
+    dialog: false,
+    email: null,
+    password: null
+  }),
+  methods: {
+    provideTheData() {
+      this.$emit('emailAndPassword', this.email, this.password)
+    },
+    hideMenu() {
+      this.$emit('hideMenu')
     }
   }
+}
 </script>
 
 <style lang="scss">
@@ -114,7 +122,6 @@
   #otherLogins {
     display: flex;
     flex-direction: column;
-    align-content: center;
     span {
       margin-top: 10px;
       margin-bottom: 10px;
