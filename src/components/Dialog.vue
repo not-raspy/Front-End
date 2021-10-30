@@ -1,5 +1,8 @@
 <template>
-  <v-row justify="center">
+  <v-row
+    v-resize="onResize"
+    justify="center"
+  >
     <v-btn
       id="buttonPortait"
       class="button"
@@ -15,11 +18,12 @@
       max-width="325px"
     >
       <v-card id="card">
-        <font-awesome
-          id="close" 
-          :icon="['fas', 'times']"
+        <button
+          id="close"
           @click="dialog = false"
-        />
+        >
+          <font-awesome :icon="['fas', 'times']"/>
+        </button>
         <div id="circle">
           <img id ="logo" alt="logo" src="@/assets/logo.png">
         </div>
@@ -57,8 +61,12 @@
             <slot name="action"/>
           przez</span>
           <div id="icons">
-            <font-awesome :icon="['fab', 'facebook-square']"/>
-            <font-awesome :icon="['fab', 'google']"/>
+            <button @click="fb">
+              <font-awesome :icon="['fab', 'facebook-square']"/>
+            </button>
+            <button @click="google">
+              <font-awesome id="google" :icon="['fab', 'google']"/>
+            </button>
           </div>
         </div>
       </v-card>
@@ -67,16 +75,70 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'Dialog',
   data: () => ({
     dialog: false,
     email: null,
-    password: null
+    password: null,
+    windowSize: {
+      x: 0,
+      y: 0
+    }
   }),
   methods: {
     provideTheData() {
       this.$emit('emailAndPassword', this.email, this.password)
+    },
+    onResize () {
+      this.windowSize = { x: window.innerWidth, y: window.innerHeight }
+    },
+    fb() {
+      this.window("http://localhost:8081/api/facebook")
+    },
+    google() {
+      this.window("http://localhost:8081/api/google")
+    },
+    window(url) {
+      if (this.windowSize.x > this.windowSize.y)
+      {
+        window.open(
+          url, 
+          null, 
+          "width = 600," +
+          "height = 500," +
+          "top=" + this.windowSize.y * 0.25 + "," +
+          "left=" + this.windowSize.x * 0.345
+        );
+      }
+      else
+      {
+        window.open(
+          url, 
+          null, 
+          "width=" + this.windowSize.x + "," +
+          "height=" + this.windowSize.y
+        );
+      }
+      
+      const hello = this.hello
+      
+      hello('google')
+      .login()
+      .then(
+        () => {
+          const authRes = hello('google').getAuthResponse()
+          axios
+            .get('http://127.0.0.1:8081/api/google/callback',{
+                params:{
+                  access_token : authRes.access_token, 
+                  provider: 'google'
+                }
+            })
+            .then((response) => {console.log(response.data.token)})})
+            .catch((error) => {console.log(error.response.data)})
     },
     hideMenu() {
       this.$emit('hideMenu')
@@ -97,7 +159,6 @@ export default {
     top: 10px;
     right: 15px;
 
-    cursor: pointer;
     font-size: x-large;
   }
   #circle {
