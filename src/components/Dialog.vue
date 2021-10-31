@@ -2,12 +2,12 @@
   <v-row
     v-resize="onResize"
     justify="center"
-  >
+    >
     <v-btn
       id="buttonPortait"
       class="button"
       @click="dialog = true, hideMenu()"
-    >
+      >
       <b>
         <slot name="buttonInscription"/>
       </b>
@@ -16,12 +16,12 @@
       v-model="dialog"
       persistent
       max-width="325px"
-    >
+      >
       <v-card id="card">
         <button
           id="close"
           @click="dialog = false"
-        >
+          >
           <font-awesome :icon="['fas', 'times']"/>
         </button>
         <div id="circle">
@@ -34,13 +34,13 @@
               v-model="email"
               label="Email"
               required
-            ></v-text-field>
+              ></v-text-field>
             <v-text-field
               v-model="password"
               type="password"
               label="Hasło"
               required
-            ></v-text-field>
+              ></v-text-field>
             <slot name="repeatPassword"/>
           </v-container>
           <slot name="rememberMe"/>
@@ -52,21 +52,22 @@
             block
             color="blue darken-1"
             @click="provideTheData"
-          >
+            >
             <slot name="action"/>
           </v-btn>
         </v-card-actions>
         <div id="otherLogins">
           <span>lub
             <slot name="action"/>
-          przez</span>
+            przez</span>
           <div id="icons">
             <button @click="fb">
               <font-awesome :icon="['fab', 'facebook-square']"/>
             </button>
-            <button @click="google">
-              <font-awesome id="google" :icon="['fab', 'google']"/>
-            </button>
+            <!--<button @click="google">-->
+            <!--<font-awesome id="google" :icon="['fab', 'google']"/>-->
+            <!--</button>-->
+            <button v-on:click="Google">Google</button>
           </div>
         </div>
       </v-card>
@@ -77,12 +78,15 @@
 <script>
 import axios from 'axios';
 
+
 export default {
   name: 'Dialog',
   data: () => ({
     dialog: false,
+    token: 'ya29.a0ARrdaM-mbIJWMHkXZtRUw0wx1XsIefPiMigiw-Hs5YsnATDhppN6KRJofuFaFgYWFCwyyqEfl7sy7Z7nJY8NzsfSVfvNl8VqFqfNC54si2uPaHSpobgwYT4ysUc9zGBDymAR7E5MMTviBwDjhQ7WUmTxtRukQA',
     email: null,
     password: null,
+    apiresponse: null,
     windowSize: {
       x: 0,
       y: 0
@@ -98,53 +102,25 @@ export default {
     fb() {
       this.window("http://localhost:8081/api/facebook")
     },
-    google() {
-      this.window("http://localhost:8081/api/google")
-    },
-    window(url) {
-      if (this.windowSize.x > this.windowSize.y)
-      {
-        window.open(
-          url, 
-          null, 
-          "width = 600," +
-          "height = 500," +
-          "top=" + this.windowSize.y * 0.25 + "," +
-          "left=" + this.windowSize.x * 0.345
-        );
-      }
-      else
-      {
-        window.open(
-          url, 
-          null, 
-          "width=" + this.windowSize.x + "," +
-          "height=" + this.windowSize.y
-        );
-      }
-      
-      const hello = this.hello
-      
-      hello('google')
-      .login()
-      .then(
-        () => {
-          const authRes = hello('google').getAuthResponse()
-          axios
-            .get('http://127.0.0.1:8081/api/google/callback',{
-                params:{
-                  access_token : authRes.access_token, 
-                  provider: 'google'
-                }
-            })
-            .then((response) => {console.log(response.data.token)})})
-            .catch((error) => {console.log(error.response.data)})
-    },
-    hideMenu() {
-      this.$emit('hideMenu')
+
+    Google: function() {
+
+      axios.post('http://localhost:8081/api/provider/callback', {
+        '_method': 'get',
+        '_token' : this.token,
+        '_provider' : 'google',
+      }).then(response => {
+        this.apiresponse = response.data
+      });
+      console.warn(this.apiresponse);
     }
   }
 }
+
+
+
+
+
 </script>
 
 <style lang="scss">
