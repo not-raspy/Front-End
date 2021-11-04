@@ -1,144 +1,165 @@
 <template>
-  <v-row
-    v-resize="onResize"
-    justify="center"
-  >
-    <v-btn
-      id="buttonPortait"
-      class="button"
-      @click="dialog = true, hideMenu()"
-    >
-      <b>
-        <slot name="buttonInscription"/>
-      </b>
-    </v-btn>
-    <v-dialog
-      v-model="dialog"
-      persistent
-      max-width="325px"
-    >
-      <v-card id="card">
-        <button
-          id="close"
-          @click="dialog = false"
-        >
-          <font-awesome :icon="['fas', 'times']"/>
-        </button>
-        <div id="circle">
-          <img id ="logo" alt="logo" src="@/assets/logo.png">
-        </div>
-        <v-card-text>
-          <v-container>
-            <slot name="v-text-field"/>
-            <v-text-field
-              v-model="email"
-              label="Email"
-              required
-            ></v-text-field>
-            <v-text-field
-              v-model="password"
-              type="password"
-              label="Hasło"
-              required
-            ></v-text-field>
-            <slot name="repeatPassword"/>
-          </v-container>
-          <slot name="rememberMe"/>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            id="buttonLogIn"
-            block
-            color="blue darken-1"
-            @click="provideTheData"
+  <div>
+    <v-row justify="center">
+      <v-btn
+        id="buttonPortait"
+        class="button"
+        @click="dialog = true, hideMenu()"
+      >
+        <b>
+          <slot name="buttonInscription"/>
+        </b>
+      </v-btn>
+      <v-dialog
+        v-model="dialog"
+        persistent
+        max-width="325px"
+      >
+        <v-card id="card">
+          <button
+            id="close"
+            @click="dialog = false"
           >
-            <slot name="action"/>
-          </v-btn>
-        </v-card-actions>
-        <div id="otherLogins">
-          <span>lub
-            <slot name="action"/>
-          przez</span>
-          <div id="icons">
-            <button @click="fb">
-              <font-awesome :icon="['fab', 'facebook-square']"/>
-            </button>
-            <button @click="google">
-              <font-awesome id="google" :icon="['fab', 'google']"/>
-            </button>
+            <font-awesome :icon="['fas', 'times']"/>
+          </button>
+          <div id="circle">
+            <img id ="logo" alt="logo" src="@/assets/logo.png">
           </div>
-        </div>
-      </v-card>
-    </v-dialog>
-  </v-row>
+          <v-card-text>
+            <v-container>
+              <slot name="v-text-field"/>
+              <v-text-field
+                v-model="email"
+                label="Email"
+                required
+              ></v-text-field>
+              <v-text-field
+                v-model="password"
+                type="password"
+                label="Hasło"
+                required
+              ></v-text-field>
+              <slot name="repeatPassword"/>
+            </v-container>
+            <slot name="rememberMe"/>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              id="buttonLogIn"
+              block
+              color="blue darken-1"
+              @click="provideTheData"
+            >
+              <slot name="action"/>
+            </v-btn>
+          </v-card-actions>
+          <div id="otherLogins">
+            <span>lub
+              <slot name="action"/>
+            przez</span>
+            <div id="icons">
+              <button>
+                <font-awesome :icon="['fab', 'facebook-square']"/>
+              </button>
+                <GoogleLogin 
+                  :params="params"
+                  :onSuccess="getTokenGoogle"
+                >
+                  <font-awesome id="google" :icon="['fab', 'google']"/>
+                </GoogleLogin>
+            </div>
+          </div>
+        </v-card>
+      </v-dialog>
+    </v-row>
+    <Announcement 
+      v-if="whetherToDisplay"
+      @close="closeTheMessage"
+      >
+      <template v-slot:content>
+        <template v-if="communique.contents">
+          <font-awesome id="symbol" :icon="['fas', communique.symbol]"/>
+          <span class="content">{{communique.contents}}</span>
+        </template>
+        <v-progress-circular
+          v-else
+          class="content"
+          indeterminate
+          color="green"
+        ></v-progress-circular>
+      </template>
+    </Announcement>
+  </div>
 </template>
 
 <script>
-import axios from 'axios';
+import Announcement from './Announcement.vue'
+
+import GoogleLogin from 'vue-google-login'
+
+import axios from 'axios'
 
 export default {
   name: 'Dialog',
+  components: {
+    Announcement,
+    GoogleLogin
+  },
   data: () => ({
     dialog: false,
     email: null,
     password: null,
-    windowSize: {
-      x: 0,
-      y: 0
+    params: {
+      client_id: "330533625286-5673scc40rk9b1osng7un882f14bj3o1.apps.googleusercontent.com"
+    },
+    social: {
+      _token: null,
+      _provider: null
+    },
+    whetherToDisplay: false,
+    communique: {
+      symbol: null,
+      contents: null
     }
   }),
   methods: {
     provideTheData() {
       this.$emit('emailAndPassword', this.email, this.password)
     },
-    onResize () {
-      this.windowSize = { x: window.innerWidth, y: window.innerHeight }
+    getTokenGoogle(googleUser) {
+      this.social._token = googleUser.Zb.access_token
+      this.social._provider = 'google'
+
+      this.sendingToken()
     },
-    fb() {
-      this.window("http://localhost:8081/api/facebook")
-    },
-    google() {
-      this.window("http://localhost:8081/api/google")
-    },
-    window(url) {
-      if (this.windowSize.x > this.windowSize.y)
+    sendingToken() {
+      this.whetherToDisplay = true
+
+      axios.post('https://citygame.ga/api/provider/callback', this.social)
+      .then(response => {
+      if (response)
       {
-        window.open(
-          url, 
-          null, 
-          "width = 600," +
-          "height = 500," +
-          "top=" + this.windowSize.y * 0.25 + "," +
-          "left=" + this.windowSize.x * 0.345
-        );
+        this.communique.symbol = "check-circle"
+        this.communique.contents = "Akcja się powiodła"
       }
-      else
-      {
-        window.open(
-          url, 
-          null, 
-          "width=" + this.windowSize.x + "," +
-          "height=" + this.windowSize.y
-        );
-      }
-      
-      const hello = this.hello
-      
-      hello('google')
-      .login()
-      .then(
-        () => {
-          const authRes = hello('google').getAuthResponse()
-          axios
-            .get('http://127.0.0.1:8081/api/google/callback',{
-                params:{
-                  access_token : authRes.access_token, 
-                  provider: 'google'
-                }
-            })
-            .then((response) => {console.log(response.data.token)})})
-            .catch((error) => {console.log(error.response.data)})
+      })
+      .catch(error => {
+        this.communique.symbol = "times-circle"
+
+        if (!error.response)
+        {
+          this.communique.contents = "Brak połączenia, spróbuj ponownie później"
+        }
+        else 
+        {
+          this.communique.contents = "Akcja się NIE powiodła"
+        }
+      })
+    },
+    closeTheMessage() {
+      this.communique.contents = null
+      this.whetherToDisplay = false
     },
     hideMenu() {
       this.$emit('hideMenu')
