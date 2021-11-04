@@ -80,7 +80,7 @@ export default {
 
       this.whetherToDisplay = true
 
-      axios.post("http://localhost:8081/api/auth/register", this.registration)
+      axios.post("https://citygame.ga/api/auth/register", this.registration)
       .then(response => {
       if (response)
       {
@@ -91,7 +91,7 @@ export default {
       .catch(error => {
         this.communique.symbol = "times-circle"
         
-        if (!error.response == true)
+        if (!error.response)
         {
           this.communique.contents = "Brak połączenia, spróbuj ponownie później"
         }
