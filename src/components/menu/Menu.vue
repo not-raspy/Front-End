@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import Login from './Login.vue'
-import Registration from './Registration.vue'
+import Login from '../login/Login.vue'
+import Registration from '../registration/Registration.vue'
 
 export default{
   name: 'Menu',
@@ -64,7 +64,7 @@ export default{
 </script>
 
 <style lang="scss">
-@import './MenuP.scss';
+@import 'MenuP';
 
 @media (orientation: landscape) {
   #containerMenu {

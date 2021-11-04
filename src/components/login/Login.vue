@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import Dialog from './Dialog.vue'
+import Dialog from '../dialog/Dialog.vue'
 
 export default {
   name: 'Login',

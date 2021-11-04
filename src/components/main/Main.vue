@@ -20,7 +20,7 @@ export default{
 </script>
 
 <style lang="scss">
-@import './MainP.scss';
+@import 'MainP';
 
 @media (orientation: landscape) {
   #containerMain {

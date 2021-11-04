@@ -62,14 +62,14 @@
 </script>
 
 <style lang="scss">
-@import './SearchEngineP.scss';
+@import 'SearchEngineP';
 
 #slotLabel {
   margin-left: 10px;
 }
 
 @media (orientation: landscape) {
-  #containerSerachEngine {
+  #containerSearchEngine {
     width: 84.4%;
     background-color: pink;
   }

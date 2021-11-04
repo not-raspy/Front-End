@@ -47,8 +47,8 @@
 </template>
 
 <script>
-import Dialog from './Dialog.vue'
-import Announcement from './Announcement.vue'
+import Dialog from '../dialog/Dialog.vue'
+import Announcement from '../announcement/Announcement.vue'
 
 import axios from 'axios';
 

@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import Menu from './components/Menu.vue'
-import Main from './components/Main.vue'
-import SearchEngine from './components/SearchEngine.vue'
+import Menu from './components/menu/Menu.vue'
+import Main from './components/main/Main.vue'
+import SearchEngine from './components/searchEngine/SearchEngine.vue'
 
 export default {
   name: 'App',

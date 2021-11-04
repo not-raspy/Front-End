@@ -94,7 +94,7 @@
 </template>
 
 <script>
-import Announcement from './Announcement.vue'
+import Announcement from '../announcement/Announcement.vue'
 
 import GoogleLogin from 'vue-google-login'
 
